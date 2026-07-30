@@ -15,7 +15,7 @@ var LANGS = LANG_OPTIONS.map(function (o) { return o.code; });
 
 var I18N = {
   en: {
-    title: "Guess the Flag!",
+    title: "Flagify",
     tagline: "Look at the flag. Pick the right country!",
     startQuestion: "How well do you know world flags?",
     startHint: "Each round has 10 questions. Good luck!",
@@ -48,7 +48,7 @@ var I18N = {
     feedbackThanks: "Thanks for your feedback! 🎉",
   },
   es: {
-    title: "¡Adivina la bandera!",
+    title: "Flagify",
     tagline: "Mira la bandera. ¡Elige el país correcto!",
     startQuestion: "¿Qué tan bien conoces las banderas del mundo?",
     startHint: "Cada ronda tiene 10 preguntas. ¡Buena suerte!",
@@ -81,7 +81,7 @@ var I18N = {
     feedbackThanks: "¡Gracias por tus comentarios! 🎉",
   },
   fr: {
-    title: "Devine le drapeau !",
+    title: "Flagify",
     tagline: "Regarde le drapeau. Choisis le bon pays !",
     startQuestion: "Connais-tu bien les drapeaux du monde ?",
     startHint: "Chaque manche a 10 questions. Bonne chance !",
@@ -114,7 +114,7 @@ var I18N = {
     feedbackThanks: "Merci pour ton avis ! 🎉",
   },
   de: {
-    title: "Errate die Flagge!",
+    title: "Flagify",
     tagline: "Schau dir die Flagge an. Wähle das richtige Land!",
     startQuestion: "Wie gut kennst du Flaggen der Welt?",
     startHint: "Jede Runde hat 10 Fragen. Viel Glück!",
@@ -147,7 +147,7 @@ var I18N = {
     feedbackThanks: "Danke für dein Feedback! 🎉",
   },
   pt: {
-    title: "Adivinhe a Bandeira!",
+    title: "Flagify",
     tagline: "Olhe a bandeira. Escolha o país certo!",
     startQuestion: "Quão bem você conhece as bandeiras do mundo?",
     startHint: "Cada rodada tem 10 perguntas. Boa sorte!",
@@ -180,7 +180,7 @@ var I18N = {
     feedbackThanks: "Obrigado pelo feedback! 🎉",
   },
   zh: {
-    title: "猜国旗！",
+    title: "Flagify",
     tagline: "看国旗，选出正确的国家！",
     startQuestion: "你对世界国旗了解多少？",
     startHint: "每轮有10道题。祝你好运！",
@@ -213,7 +213,7 @@ var I18N = {
     feedbackThanks: "感谢你的反馈！🎉",
   },
   ja: {
-    title: "国旗クイズ！",
+    title: "Flagify",
     tagline: "国旗を見て、正しい国を選ぼう！",
     startQuestion: "世界の国旗、どのくらい知ってる？",
     startHint: "1ラウンド10問。がんばって！",
@@ -246,7 +246,7 @@ var I18N = {
     feedbackThanks: "フィードバックありがとう！🎉",
   },
   ko: {
-    title: "국기 맞히기!",
+    title: "Flagify",
     tagline: "국기를 보고 맞는 나라를 고르세요!",
     startQuestion: "세계 국기를 얼마나 알고 있나요?",
     startHint: "한 라운드에 10문제입니다. 행운을 빌어요!",
@@ -279,7 +279,7 @@ var I18N = {
     feedbackThanks: "피드백 감사합니다! 🎉",
   },
   ar: {
-    title: "خمّن العلم!",
+    title: "Flagify",
     tagline: "انظر إلى العلم. اختر البلد الصحيح!",
     startQuestion: "ما مدى معرفتك بأعلام العالم؟",
     startHint: "كل جولة فيها 10 أسئلة. حظاً موفقاً!",
@@ -312,7 +312,7 @@ var I18N = {
     feedbackThanks: "شكراً على ملاحظاتك! 🎉",
   },
   hi: {
-    title: "झंडा पहचानें!",
+    title: "Flagify",
     tagline: "झंडे को देखो। सही देश चुनो!",
     startQuestion: "आप दुनिया के झंडे कितने जानते हैं?",
     startHint: "हर राउंड में 10 सवाल। शुभकामनाएँ!",

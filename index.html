@@ -3,9 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Guess the Flag! — Can you name the country from its flag?" />
+    <meta name="description" content="Flagify — Can you name the country from its flag?" />
+    <meta name="apple-mobile-web-app-title" content="Flagify" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-    <title>Guess the Flag!</title>
+        <script>
+      (function () {
+        try {
+          var key = "flagify-night-mode";
+          var legacy = localStorage.getItem("guess-the-flag-night-mode");
+          var saved = localStorage.getItem(key);
+          if (saved === null && legacy !== null) {
+            saved = legacy;
+            localStorage.setItem(key, legacy);
+          }
+          var dark =
+            saved === "true" ||
+            (saved !== "false" &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches);
+          if (dark) {
+            document.documentElement.classList.add("night-mode");
+            document.documentElement.style.colorScheme = "dark";
+          } else {
+            document.documentElement.style.colorScheme = "light";
+          }
+        } catch (e) {}
+      })();
+    </script>
+<title>Flagify</title>
     <style>
       *,
       *::before,
@@ -24,6 +49,81 @@
         --card: #FFFFFF;
         --muted: #6B7280;
         --radius: 16px;
+        color-scheme: light;
+      }
+
+      html.night-mode {
+        --bg: #0b1220;
+        --blue: #60a5fa;
+        --green: #4ade80;
+        --red: #f87171;
+        --text: #e5e7eb;
+        --card: #1e293b;
+        --muted: #94a3b8;
+        color-scheme: dark;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        html:not(.night-mode):not(.day-mode) {
+          --bg: #0b1220;
+          --blue: #60a5fa;
+          --green: #4ade80;
+          --red: #f87171;
+          --text: #e5e7eb;
+          --card: #1e293b;
+          --muted: #94a3b8;
+          color-scheme: dark;
+        }
+      }
+
+      .night-mode-btn {
+        position: absolute;
+        top: 3.35rem;
+        left: 1rem;
+        z-index: 20;
+        border: 2px solid rgba(255, 255, 255, 0.85);
+        border-radius: 10px;
+        padding: 0.35rem 0.65rem;
+        font-family: inherit;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.15);
+        cursor: pointer;
+      }
+
+      .night-mode-btn:hover {
+        background: rgba(255, 255, 255, 0.28);
+      }
+
+      html[dir="rtl"] .night-mode-btn {
+        left: auto;
+        right: 1rem;
+      }
+
+      html.night-mode .admin-footer {
+        background: #1a2332;
+      }
+
+      html.night-mode .admin-link {
+        color: #86efac;
+      }
+
+      html.night-mode .admin-link:hover {
+        color: #bbf7d0;
+      }
+
+      html.night-mode .level-btn,
+      html.night-mode .choice,
+      html.night-mode .lang-toggle,
+      html.night-mode .lang-menu,
+      html.night-mode .feedback-card textarea,
+      html.night-mode .admin-password-input,
+      html.night-mode .score-pill,
+      html.night-mode .stat-box {
+        background: var(--card);
+        color: var(--text);
+        border-color: rgba(148, 163, 184, 0.35);
       }
 
       html, body {
@@ -453,20 +553,37 @@
         text-align: right;
       }
 
-      .logo {
-        font-size: 3.5rem;
-        line-height: 1;
-        margin-bottom: 0.5rem;
+      .header-brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        text-align: left;
+      }
+
+      .brand-logo {
+        width: 56px;
+        height: 56px;
+        border-radius: 14px;
+        object-fit: cover;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25);
+        background: #fff;
+      }
+
+      html.night-mode .brand-logo {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
       }
 
       h1 {
         font-size: clamp(2rem, 6vw, 2.75rem);
         color: #ffffff;
+        margin-top: 0;
       }
 
       .tagline {
         color: rgba(255, 255, 255, 0.9);
-        margin-top: 0.35rem;
+        margin-top: 0.15rem;
         font-size: 1.05rem;
       }
 
@@ -746,9 +863,10 @@
           padding: 0.65rem 0.75rem 0.75rem;
         }
 
-        .logo {
-          font-size: 2.25rem;
-          margin-bottom: 0.25rem;
+        .brand-logo {
+          width: 48px;
+          height: 48px;
+          border-radius: 12px;
         }
 
         h1 {
@@ -836,6 +954,16 @@
     <div class="app">
       <header>
         <button type="button" class="feedback-btn" id="feedbackOpenBtn">💬 Feedback</button>
+        <button
+          type="button"
+          class="night-mode-btn"
+          id="night-mode-btn"
+          title="Night mode"
+          aria-label="Toggle night mode"
+          aria-pressed="false"
+        >
+          🌙 Night
+        </button>
         <div class="lang-picker" id="langPicker">
           <button type="button" class="lang-toggle" id="langToggle" aria-haspopup="listbox" aria-expanded="false">
             <span id="langToggleLabel">English</span>
@@ -843,9 +971,21 @@
           </button>
           <ul class="lang-menu hidden" id="langMenu" role="listbox"></ul>
         </div>
-        <div class="logo" aria-hidden="true">🏳️</div>
-        <h1 id="titleText">Guess the Flag!</h1>
-        <p class="tagline" id="taglineText">Look at the flag. Pick the right country!</p>
+        <div class="header-brand">
+          <img
+            class="brand-logo"
+            src="logo.png"
+            alt="Flagify logo"
+            width="56"
+            height="56"
+            decoding="async"
+            fetchpriority="high"
+          />
+          <div>
+            <h1 id="titleText">Flagify</h1>
+            <p class="tagline" id="taglineText">Look at the flag. Pick the right country!</p>
+          </div>
+        </div>
       </header>
 
       <div class="main-area">
@@ -1435,7 +1575,7 @@
         var link = document.createElement("a");
         link.href = url;
         link.download =
-          "guess-the-flag-feedback-" + new Date().toISOString().slice(0, 10) + ".txt";
+          "flagify-feedback-" + new Date().toISOString().slice(0, 10) + ".txt";
         link.click();
         URL.revokeObjectURL(url);
       }
@@ -1695,6 +1835,68 @@
         container.innerHTML = "";
         container.appendChild(grid);
       }
+
+      const nightModeBtn = document.getElementById("night-mode-btn");
+      const NIGHT_MODE_KEY = "flagify-night-mode";
+
+      function systemPrefersDark() {
+        return window.matchMedia("(prefers-color-scheme: dark)").matches;
+      }
+
+      function isNightModeOn() {
+        return document.documentElement.classList.contains("night-mode");
+      }
+
+      function applyNightMode(enabled, persist) {
+        document.documentElement.classList.toggle("night-mode", enabled);
+        document.documentElement.classList.toggle("day-mode", !enabled);
+        document.documentElement.style.colorScheme = enabled ? "dark" : "light";
+        if (nightModeBtn) {
+          nightModeBtn.setAttribute("aria-pressed", enabled ? "true" : "false");
+          nightModeBtn.title = enabled ? "Day mode" : "Night mode";
+          nightModeBtn.setAttribute(
+            "aria-label",
+            enabled ? "Switch to day mode" : "Switch to night mode"
+          );
+          nightModeBtn.textContent = enabled ? "☀️ Day" : "🌙 Night";
+        }
+        if (persist) {
+          try {
+            localStorage.setItem(NIGHT_MODE_KEY, enabled ? "true" : "false");
+          } catch (e) {}
+        }
+      }
+
+      function resolveNightMode() {
+        try {
+          const saved = localStorage.getItem(NIGHT_MODE_KEY);
+          if (saved === "true") return true;
+          if (saved === "false") return false;
+        } catch (e) {}
+        return systemPrefersDark();
+      }
+
+      applyNightMode(resolveNightMode(), false);
+
+      if (nightModeBtn) {
+        nightModeBtn.addEventListener("click", () => {
+          applyNightMode(!isNightModeOn(), true);
+        });
+      }
+
+      try {
+        window
+          .matchMedia("(prefers-color-scheme: dark)")
+          .addEventListener("change", () => {
+            try {
+              if (localStorage.getItem(NIGHT_MODE_KEY) == null) {
+                applyNightMode(systemPrefersDark(), false);
+              }
+            } catch (e) {
+              applyNightMode(systemPrefersDark(), false);
+            }
+          });
+      } catch (e) {}
 
       applyLanguage();
       buildFlagsBackground();
