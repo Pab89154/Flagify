@@ -76,31 +76,6 @@
         }
       }
 
-      .night-mode-btn {
-        position: absolute;
-        top: 3.35rem;
-        left: 1rem;
-        z-index: 20;
-        border: 2px solid rgba(255, 255, 255, 0.85);
-        border-radius: 10px;
-        padding: 0.35rem 0.65rem;
-        font-family: inherit;
-        font-size: 0.8rem;
-        font-weight: 600;
-        color: #ffffff;
-        background: rgba(255, 255, 255, 0.15);
-        cursor: pointer;
-      }
-
-      .night-mode-btn:hover {
-        background: rgba(255, 255, 255, 0.28);
-      }
-
-      html[dir="rtl"] .night-mode-btn {
-        left: auto;
-        right: 1rem;
-      }
-
       html.night-mode .admin-footer {
         background: #1a2332;
       }
@@ -195,7 +170,7 @@
         width: calc(100% + 2rem);
         margin: 0 -1rem 0;
         flex-shrink: 0;
-        text-align: center;
+        text-align: left;
         padding: 0.85rem 1rem 1rem;
         background: var(--blue);
         color: #ffffff;
@@ -204,41 +179,72 @@
         position: relative;
       }
 
+      .header-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 0.75rem;
+      }
+
+      .header-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.35rem;
+        margin-left: auto;
+        flex-shrink: 0;
+      }
+
+      .header-actions-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.35rem;
+      }
+
       .lang-picker {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
+        position: relative;
         z-index: 20;
       }
 
-      .feedback-btn {
-        position: absolute;
-        top: 1rem;
-        left: 1rem;
-        z-index: 20;
+      .feedback-btn,
+      .night-mode-btn {
+        position: static;
+        z-index: auto;
         border: 2px solid rgba(255, 255, 255, 0.85);
-        border-radius: 10px;
-        padding: 0.45rem 0.75rem;
+        border-radius: 999px;
+        padding: 0.35rem 0.7rem;
         font-family: inherit;
-        font-size: 0.9rem;
+        font-size: 0.78rem;
         font-weight: 600;
         color: #ffffff;
         background: rgba(255, 255, 255, 0.15);
         cursor: pointer;
+        white-space: nowrap;
+        line-height: 1.2;
       }
 
-      .feedback-btn:hover {
+      .feedback-btn:hover,
+      .night-mode-btn:hover {
         background: rgba(255, 255, 255, 0.28);
       }
 
-      html[dir="rtl"] .feedback-btn {
-        left: auto;
-        right: 1rem;
+      html[dir="rtl"] .header-top {
+        flex-direction: row-reverse;
       }
 
-      html[dir="rtl"] .lang-picker {
-        right: auto;
-        left: 1rem;
+      html[dir="rtl"] .header-actions {
+        align-items: flex-start;
+        margin-left: 0;
+        margin-right: auto;
+      }
+
+      html[dir="rtl"] .header-actions-grid {
+        justify-content: flex-start;
+      }
+
+      html[dir="rtl"] .header-brand {
+        text-align: right;
       }
 
       .feedback-modal {
@@ -476,16 +482,18 @@
         align-items: center;
         gap: 0.35rem;
         border: 2px solid rgba(255, 255, 255, 0.85);
-        border-radius: 10px;
-        padding: 0.45rem 0.75rem;
+        border-radius: 999px;
+        padding: 0.35rem 0.7rem;
         font-family: inherit;
-        font-size: 0.9rem;
+        font-size: 0.78rem;
         font-weight: 600;
         color: #ffffff;
         background: rgba(255, 255, 255, 0.15);
         cursor: pointer;
-        min-width: 130px;
+        min-width: 0;
         justify-content: space-between;
+        white-space: nowrap;
+        line-height: 1.2;
       }
 
       .lang-toggle:hover {
@@ -501,6 +509,7 @@
         position: absolute;
         top: calc(100% + 0.35rem);
         right: 0;
+        z-index: 40;
         min-width: 220px;
         list-style: none;
         background: #ffffff;
@@ -556,9 +565,11 @@
       .header-brand {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         gap: 0.75rem;
         text-align: left;
+        min-width: 0;
+        flex: 1;
       }
 
       .brand-logo {
@@ -576,15 +587,16 @@
       }
 
       h1 {
-        font-size: clamp(2rem, 6vw, 2.75rem);
+        font-size: clamp(1.55rem, 5vw, 2.4rem);
         color: #ffffff;
         margin-top: 0;
+        line-height: 1.15;
       }
 
       .tagline {
         color: rgba(255, 255, 255, 0.9);
         margin-top: 0.15rem;
-        font-size: 1.05rem;
+        font-size: 0.95rem;
       }
 
       .panel {
@@ -863,6 +875,54 @@
           padding: 0.65rem 0.75rem 0.75rem;
         }
 
+        .header-top {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0.55rem;
+        }
+
+        .header-actions {
+          align-items: stretch;
+          margin-left: 0;
+          width: 100%;
+        }
+
+        .header-actions-grid {
+          justify-content: stretch;
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 0.35rem;
+        }
+
+        .header-actions-grid .feedback-btn,
+        .header-actions-grid .night-mode-btn,
+        .header-actions-grid .lang-toggle {
+          width: 100%;
+          justify-content: center;
+          font-size: 0.72rem;
+          padding: 0.4rem 0.35rem;
+          min-width: 0;
+        }
+
+        .header-actions-grid .lang-picker {
+          width: 100%;
+        }
+
+        .header-actions-grid .lang-menu {
+          right: 0;
+          left: auto;
+          min-width: min(220px, 70vw);
+        }
+
+        html[dir="rtl"] .header-top {
+          flex-direction: column;
+        }
+
+        html[dir="rtl"] .header-actions {
+          align-items: stretch;
+          margin-right: 0;
+        }
+
         .brand-logo {
           width: 48px;
           height: 48px;
@@ -870,28 +930,11 @@
         }
 
         h1 {
-          font-size: 1.5rem;
+          font-size: 1.45rem;
         }
 
         .tagline {
-          font-size: 0.9rem;
-        }
-
-        .feedback-btn,
-        .lang-toggle {
-          top: 0.5rem;
-          font-size: 0.78rem;
-          padding: 0.35rem 0.55rem;
-          min-width: auto;
-        }
-
-        .feedback-btn {
-          left: 0.5rem;
-        }
-
-        .lang-picker {
-          top: 0.5rem;
-          right: 0.5rem;
+          font-size: 0.82rem;
         }
 
         .panel {
@@ -953,37 +996,43 @@
   <body>
     <div class="app">
       <header>
-        <button type="button" class="feedback-btn" id="feedbackOpenBtn">💬 Feedback</button>
-        <button
-          type="button"
-          class="night-mode-btn"
-          id="night-mode-btn"
-          title="Night mode"
-          aria-label="Toggle night mode"
-          aria-pressed="false"
-        >
-          🌙 Night
-        </button>
-        <div class="lang-picker" id="langPicker">
-          <button type="button" class="lang-toggle" id="langToggle" aria-haspopup="listbox" aria-expanded="false">
-            <span id="langToggleLabel">English</span>
-            <span class="lang-chevron" aria-hidden="true">▾</span>
-          </button>
-          <ul class="lang-menu hidden" id="langMenu" role="listbox"></ul>
-        </div>
-        <div class="header-brand">
-          <img
-            class="brand-logo"
-            src="logo.png"
-            alt="Flagify logo"
-            width="56"
-            height="56"
-            decoding="async"
-            fetchpriority="high"
-          />
-          <div>
-            <h1 id="titleText">Flagify</h1>
-            <p class="tagline" id="taglineText">Look at the flag. Pick the right country!</p>
+        <div class="header-top">
+          <div class="header-brand">
+            <img
+              class="brand-logo"
+              src="logo.png"
+              alt="Flagify logo"
+              width="56"
+              height="56"
+              decoding="async"
+              fetchpriority="high"
+            />
+            <div>
+              <h1 id="titleText">Flagify</h1>
+              <p class="tagline" id="taglineText">Look at the flag. Pick the right country!</p>
+            </div>
+          </div>
+          <div class="header-actions">
+            <div class="header-actions-grid">
+              <button type="button" class="feedback-btn" id="feedbackOpenBtn">💬 Feedback</button>
+              <button
+                type="button"
+                class="night-mode-btn"
+                id="night-mode-btn"
+                title="Night mode"
+                aria-label="Toggle night mode"
+                aria-pressed="false"
+              >
+                🌙 Night
+              </button>
+              <div class="lang-picker" id="langPicker">
+                <button type="button" class="lang-toggle" id="langToggle" aria-haspopup="listbox" aria-expanded="false">
+                  <span id="langToggleLabel">English</span>
+                  <span class="lang-chevron" aria-hidden="true">▾</span>
+                </button>
+                <ul class="lang-menu hidden" id="langMenu" role="listbox"></ul>
+              </div>
+            </div>
           </div>
         </div>
       </header>
