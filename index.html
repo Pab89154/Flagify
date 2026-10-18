@@ -1167,7 +1167,7 @@
       var LEVEL_CONFIG = {
         easy: { wrongCount: 3, questions: 10 },
         medium: { wrongCount: 3, questions: 10 },
-        hard: { wrongCount: 5, questions: 10 },
+        hard: { wrongCount: 7, questions: 10 },
       };
 
       var ROUND_BY_LEVEL = {
@@ -1439,61 +1439,95 @@
           add(word.replace(/stan$/i, "land"));
           add(word.replace(/stan$/i, "sia"));
           add(word.replace(/stan$/i, "stania"));
+          add(word.replace(/stan$/i, "stine"));
+          add(word.replace(/stan$/i, "stana"));
+          add(word.replace(/stan$/i, "stia"));
         } else if (/land$/i.test(word)) {
           add(word.replace(/land$/i, "lia"));
           add(word.replace(/land$/i, "landia"));
+          add(word.replace(/land$/i, "lande"));
+          add(word.replace(/land$/i, "landa"));
+          add(word.replace(/land$/i, "via"));
         } else if (/ia$/i.test(word)) {
           add(word.replace(/ia$/i, "aria"));
           add(word.replace(/ia$/i, "ovia"));
           add(word.replace(/ia$/i, "esia"));
           add(word.replace(/ia$/i, "ena"));
           add(word.replace(/ia$/i, "iana"));
+          add(word.replace(/ia$/i, "olia"));
+          add(word.replace(/ia$/i, "inia"));
+          add(word.replace(/ia$/i, "ique"));
+          add(word.replace(/ia$/i, "une"));
         } else if (/i$/i.test(word)) {
           add(word + "ana");
+          add(word + "na");
+          add(word + "ta");
           add(word.slice(0, -1) + "enia");
           add(word.slice(0, -1) + "ora");
+          add(word.slice(0, -1) + "ina");
         } else if (/u$/i.test(word)) {
           add(word + "an");
           add(word + "nia");
+          add(word + "la");
           add(word.slice(0, -1) + "aria");
+          add(word.slice(0, -1) + "uria");
+          add(word.slice(0, -1) + "avia");
         } else if (/o$/i.test(word)) {
           add(word + "nia");
           add(word + "via");
+          add(word + "na");
           add(word.slice(0, -1) + "avia");
           add(word.slice(0, -1) + "oria");
+          add(word.slice(0, -1) + "ona");
+          add(word.slice(0, -1) + "osa");
         } else if (/e$/i.test(word)) {
           add(word + "nia");
           add(word + "lia");
+          add(word + "se");
           add(word.slice(0, -1) + "ia");
+          add(word.slice(0, -1) + "ine");
+          add(word.slice(0, -1) + "ese");
           if (word.length <= 7) add(word.slice(0, -1) + "ora");
         } else if (/a$/i.test(word)) {
           add(word.slice(0, -1) + "ia");
           add(word.slice(0, -1) + "aria");
           add(word.slice(0, -1) + "ovia");
           add(word.slice(0, -1) + "esia");
+          add(word.slice(0, -1) + "ana");
+          add(word.slice(0, -1) + "una");
+          add(word.slice(0, -1) + "ada");
+          add(word + "na");
         } else {
           add(word + "ia");
           add(word + "avia");
           add(word + "ovia");
+          add(word + "ica");
+          add(word + "ita");
+          add(word + "ine");
           if (!/n$/i.test(word)) {
             add(word + "ena");
+            add(word + "ana");
             if (word.length <= 6) add(word + "ora");
           }
+          if (word.length <= 6) add(word + "istan");
           if (/an$/i.test(word)) {
             add(word.slice(0, -2) + "ania");
             add(word.slice(0, -2) + "ara");
             add(word.slice(0, -2) + "onia");
+            add(word.slice(0, -2) + "en");
+            add(word.slice(0, -2) + "in");
           }
           if (/os$/i.test(word)) {
             add(word.slice(0, -2) + "osia");
             add(word.slice(0, -2) + "ova");
+            add(word.slice(0, -2) + "as");
           }
         }
         return list;
       }
 
       function plausibleLookalike(baseWord, candidate) {
-        if (!candidate || candidate.length < 4 || candidate.length > 14) return false;
+        if (!candidate || candidate.length < 4 || candidate.length > 16) return false;
         if (!/^[\p{L}]+$/u.test(candidate)) return false;
         if (/ii|aa|uu/i.test(candidate)) return false;
         var foldedBase = normalizeName(baseWord);
@@ -1570,7 +1604,7 @@
           });
         }
 
-        take(correctCode, Math.min(2, count));
+        take(correctCode, Math.min(3, count));
         var others = shuffle(Object.keys(COUNTRY_NAMES).filter(function (code) {
           return code !== correctCode;
         }));
